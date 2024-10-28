@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -27,6 +28,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Snackbar
@@ -67,7 +69,9 @@ class MainActivity : ComponentActivity() {
         permissionLauncher = registerForActivityResult(
             ActivityResultContracts.RequestMultiplePermissions()
         ) {
-            viewModel.loadWeatherInfo()
+            viewModel.run {
+                loadWeatherInfo()
+            }
         }
         permissionLauncher.launch(
             arrayOf(
@@ -104,6 +108,7 @@ class MainActivity : ComponentActivity() {
                                 modifier = Modifier
                                     .background(MaterialTheme.colorScheme.errorContainer)
                                     .align(Alignment.BottomEnd)
+                                    .fillMaxWidth()
                             ) {
                                 Column(
                                     modifier = Modifier
@@ -115,18 +120,14 @@ class MainActivity : ComponentActivity() {
                                     )
                                     Spacer(modifier = Modifier.height(2.dp))
                                     Text(
-                                        text = "Solution :",
-                                        color = MaterialTheme.colorScheme.error
-                                    )
-                                    Text(
-                                        text = "Restart the application",
+                                        text =  when (error){
+                                            "HTTPS 502 " -> "Bad Gateway"
+                                            "HTTP 502 " -> "Bad Gateway"
+                                            else -> ""
+                                         },
                                         color = MaterialTheme.colorScheme.error
                                     )
                                     Spacer(modifier = Modifier.height(2.dp))
-                                    Text(
-                                        text = "or report to developer🙏",
-                                        color = MaterialTheme.colorScheme.error
-                                    )
                                 }
                             }
                     }

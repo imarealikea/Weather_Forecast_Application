@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -17,8 +16,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -82,33 +79,4 @@ fun HumidityCard(state: WeatherState, modifier: Modifier, color: MaterialTheme){
 @Preview
 @Composable
 fun HumidityPreview(
-){
-    HumidityCard(modifier = Modifier,color = MaterialTheme,
-        state = WeatherState(
-            WeatherInfo(
-                currentWeatherData = WeatherData(
-                    lastUpdated = "2024-01-23 20:30",
-                    airQualityData = AirQualityData(co = 1695.6, no2 = 63.1, o3 = 22.7, so2 = 14.4, pm2_5 = 47.0, pm10 = 71.7),
-                    code = 1003,
-                    feelslikeCelsius = 28.8,
-                    humidity = 100,
-                    isDay = 0,
-                    uv = 1.0,
-                    uvIndex = UvIndexType.fromWeatherWeb(uv = 1.0),
-                    weatherType = WeatherType.Overcast,
-                    temperatureCelsius = 28.0,
-                    usEpaIndex = 1,
-                    usEpaIndexType = UsEpaIndex.fromWeatherWeb(usEpaIndex = 1),
-                    windKph = 16.9,
-                    windDirType = WindDirType.W,
-                    visKM = 10.0
-                ),
-                currentLocationData = LocationData(
-                    country = "Thailand",
-                    localtime = "2024-01-23 20:34",
-                    name = "Pak Kret",
-                    region = "Nonthaburi"
-                )
-            )
-        ))
-}
+){}

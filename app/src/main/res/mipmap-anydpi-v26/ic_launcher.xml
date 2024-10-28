@@ -3,5 +3,5 @@
     <background android:drawable="@color/ic_background_alpha"/>
     <foreground android:drawable="@drawable/ic_foreground_alpha"/>
 
-    <monochrome android:drawable="@drawable/ic_foreground_alpha"/>
+    <monochrome android:drawable="@drawable/ic_new_monochrome"/>
 </adaptive-icon>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Weather Forecast</string>
+    <string name="app_name">Weather</string>
     <string name="uv_index_title">UV Index</string>
     <string name="humidity_title">Humidity</string>
     <string name="air_quality">Air Quality</string>
@@ -34,4 +34,7 @@
     <string name="north_northwest">North-Northwest</string>
     <string name="error" translatable="false">Error</string>
     <string name="from_the_dir">From the</string>
+    <string name="pm10">PM10</string>
+    <string name="co">CO</string>
+    <string name="no2">NO2</string>
 </resources>

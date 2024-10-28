@@ -33,4 +33,7 @@
     <string name="northwest">ตะวันตกเฉียงเหนือ</string>
     <string name="north_northwest">เหนือ-ตะวันตกเฉียงเหนือ</string>
     <string name="from_the_dir">จากทิศ</string>
+    <string name="pm10">PM10</string>
+    <string name="co">CO</string>
+    <string name="no2">NO2</string>
 </resources>

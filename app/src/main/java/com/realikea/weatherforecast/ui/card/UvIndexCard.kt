@@ -2,15 +2,14 @@ package com.realikea.weatherforecast.ui.card
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
@@ -33,10 +32,18 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.realikea.weatherforecast.R
+import com.realikea.weatherforecast.model.weather.AirQualityData
+import com.realikea.weatherforecast.model.weather.LocationData
 import com.realikea.weatherforecast.model.weather.WeatherData
+import com.realikea.weatherforecast.model.weather.WeatherInfo
+import com.realikea.weatherforecast.model.weather.WeatherType
+import com.realikea.weatherforecast.model.weather.subtype.UsEpaIndex
+import com.realikea.weatherforecast.model.weather.subtype.UvIndexType
+import com.realikea.weatherforecast.model.weather.subtype.WindDirType
 import com.realikea.weatherforecast.ui.WeatherState
 
 @Composable
@@ -62,7 +69,7 @@ fun UVindexCard(
                         style = MaterialTheme.typography.headlineSmall,
                         modifier = Modifier
                             .padding(start = 10.dp, top = 10.dp, bottom = 6.dp)
-                            .width(67.dp)
+
                             .height(18.dp)
                             .alpha(1f)
 
@@ -72,12 +79,16 @@ fun UVindexCard(
                         Image(
                             painter = painterResource(data.uvIndex.colorIndex),
                             contentDescription = null,
-                            modifier = Modifier.align(Alignment.TopCenter),
+                            modifier = Modifier
+                                .align(Alignment.TopCenter)
+                                .fillMaxSize()
+                                .padding(bottom = 25.dp, start = 10.dp, end = 10.dp)
+                            ,
                         )
 
-                        Column(modifier = Modifier.padding(top = 15.dp)){
+                        Column(modifier = Modifier.padding(top = 20.dp)){
                             Text(
-                                text = "${data.uv}",
+                                text = "${data.uv.toInt()}",
                                 style = MaterialTheme.typography.titleLarge,
                                 textAlign = TextAlign.Center,
                                 modifier = Modifier
@@ -154,8 +165,13 @@ fun UvIndexDialog(
         )
         Text(
             text = weatherData.uvIndex.recommendDesc,
-            style = MaterialTheme.typography.displaySmall
+            style = MaterialTheme.typography.bodyLarge
 
         )
     }
+}
+@Preview
+@Composable
+fun UvPreview(
+){
 }
