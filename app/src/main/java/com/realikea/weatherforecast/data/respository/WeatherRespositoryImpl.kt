@@ -5,6 +5,7 @@ import com.realikea.weatherforecast.domain.repository.WeatherRepository
 import com.realikea.weatherforecast.model.weather.WeatherInfo
 import com.realikea.weatherforecast.network.WeatherApiService
 import com.realikea.weatherforecast.domain.util.Resource
+import com.realikea.weatherforecast.model.weather.GeocodeInfo
 import javax.inject.Inject
 
 

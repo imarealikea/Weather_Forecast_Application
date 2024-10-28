@@ -47,7 +47,7 @@ fun FeelLikeCard(state: WeatherState, modifier: Modifier, color: MaterialTheme){
                         .alpha(1f)
                 )
                 Text(
-                    text = "${data.feelslikeCelsius}°",
+                    text = "${data.feelslikeCelsius.toInt()}°",
                     textAlign = TextAlign.Left,
                     style = MaterialTheme.typography.titleMedium,
                     textDecoration = TextDecoration.None,

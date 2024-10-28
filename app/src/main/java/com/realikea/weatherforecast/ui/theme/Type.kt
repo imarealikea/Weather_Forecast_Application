@@ -8,59 +8,46 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.realikea.weatherforecast.R
 
-val IBMPlexMono = FontFamily(
-    Font(R.font.ibmplexmono_regular),
-    Font(R.font.ibmplexmono_bold, FontWeight.Bold)
+import androidx.compose.ui.text.googlefonts.GoogleFont
+import androidx.compose.ui.text.googlefonts.Font
+
+val provider = GoogleFont.Provider(
+    providerAuthority = "com.google.android.gms.fonts",
+    providerPackage = "com.google.android.gms",
+    certificates = R.array.com_google_android_gms_fonts_certs
 )
-val IBMPlexSans = FontFamily(
-    Font(R.font.ibmplexsans_medium),
-    Font(R.font.ibmplexsans_bold, FontWeight.Bold)
-)
-val Typography = Typography(
-    displayLarge = TextStyle(
-        fontFamily = IBMPlexMono,
-        fontWeight = FontWeight.Bold,
-        fontSize = 60.sp
-    ),
-    displayMedium = TextStyle(
-        fontFamily = IBMPlexMono,
-        fontWeight = FontWeight.Bold,
-        fontSize = 32.sp
-    ),
-    displaySmall = TextStyle(
-        fontFamily = IBMPlexSans,
-        fontWeight = FontWeight.Medium,
-        fontSize = 20.sp
-    ),
-    headlineMedium = TextStyle(
-        fontFamily = IBMPlexSans,
-        fontWeight = FontWeight.Normal,
-        fontSize = 18.sp
-    ),
-    headlineSmall = TextStyle(
-        fontFamily = IBMPlexSans,
-        fontWeight = FontWeight.Normal,
-        fontSize = 15.sp
-    ),
-    titleLarge = TextStyle(
-        fontFamily = IBMPlexMono,
-        fontWeight = FontWeight.Bold,
-        fontSize = 36.sp
-    ),
-    titleMedium = TextStyle(
-        fontFamily = IBMPlexMono,
-        fontWeight = FontWeight.Bold,
-        fontSize = 32.sp,
-        letterSpacing = (-2).sp
-    ),
-    bodyMedium = TextStyle(
-        fontFamily = IBMPlexSans,
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp
-    ),
-    labelMedium = TextStyle(
-        fontFamily = IBMPlexMono,
-        fontWeight = FontWeight.Medium,
-        fontSize = 24.sp
+
+val bodyFontFamily = FontFamily(
+    Font(
+        googleFont = GoogleFont("IBM Plex Sans Thai"),
+        fontProvider = provider,
     )
+)
+
+val displayFontFamily = FontFamily(
+    Font(
+        googleFont = GoogleFont("IBM Plex Sans Thai"),
+        fontProvider = provider,
+    )
+)
+
+// Default Material 3 typography values
+val baseline = Typography()
+
+val WeatherTypography = Typography(
+    displayLarge = baseline.displayLarge.copy(fontFamily = displayFontFamily),
+    displayMedium = baseline.displayMedium.copy(fontFamily = displayFontFamily),
+    displaySmall = baseline.displaySmall.copy(fontFamily = displayFontFamily),
+    headlineLarge = baseline.headlineLarge.copy(fontFamily = displayFontFamily),
+    headlineMedium = baseline.headlineMedium.copy(fontFamily = displayFontFamily),
+    headlineSmall = baseline.headlineSmall.copy(fontFamily = displayFontFamily),
+    titleLarge = baseline.titleLarge.copy(fontFamily = displayFontFamily),
+    titleMedium = baseline.titleMedium.copy(fontFamily = displayFontFamily),
+    titleSmall = baseline.titleSmall.copy(fontFamily = displayFontFamily),
+    bodyLarge = baseline.bodyLarge.copy(fontFamily = bodyFontFamily),
+    bodyMedium = baseline.bodyMedium.copy(fontFamily = bodyFontFamily),
+    bodySmall = baseline.bodySmall.copy(fontFamily = bodyFontFamily),
+    labelLarge = baseline.labelLarge.copy(fontFamily = bodyFontFamily),
+    labelMedium = baseline.labelMedium.copy(fontFamily = bodyFontFamily),
+    labelSmall = baseline.labelSmall.copy(fontFamily = bodyFontFamily),
 )

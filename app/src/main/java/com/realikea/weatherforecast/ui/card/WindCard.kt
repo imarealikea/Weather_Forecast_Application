@@ -2,7 +2,6 @@ package com.realikea.weatherforecast.ui.card
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,7 +12,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Card
@@ -112,7 +110,7 @@ fun WindCard(
                     }
                 }
                 Text(
-                    text = "${stringResource(R.string.from_the_dir)} ${stringResource(data.windDirType.windDirection)}",
+                    text = stringResource(data.windDirType.windDirection),
                     style = MaterialTheme.typography.headlineSmall,
                     modifier = Modifier
                         .align(Alignment.CenterHorizontally)
@@ -164,32 +162,4 @@ fun WindCard(
 @Composable
 fun WindCardPreview(
 ){
-    WindCard(
-        state = WeatherState(
-            WeatherInfo(
-            currentWeatherData = WeatherData(
-                lastUpdated = "2024-01-23 20:30",
-                airQualityData = AirQualityData(co = 1695.6, no2 = 63.1, o3 = 22.7, so2 = 14.4, pm2_5 = 47.0, pm10 = 71.7),
-                code = 1003,
-                feelslikeCelsius = 28.8,
-                humidity = 70,
-                isDay = 0,
-                uv = 1.0,
-                uvIndex = UvIndexType.fromWeatherWeb(uv = 1.0),
-                weatherType = WeatherType.Overcast,
-                temperatureCelsius = 28.0,
-                usEpaIndex = 1,
-                usEpaIndexType = UsEpaIndex.fromWeatherWeb(usEpaIndex = 1),
-                windKph = 16.9,
-                windDirType = WindDirType.W,
-                visKM = 10.0
-            ),
-            currentLocationData = LocationData(
-                country = "Thailand",
-                localtime = "2024-01-23 20:34",
-                name = "Pak Kret",
-                region = "Nonthaburi"
-            )
-        )
-        ))
 }

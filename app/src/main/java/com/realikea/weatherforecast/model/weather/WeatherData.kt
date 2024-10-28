@@ -2,8 +2,8 @@ package com.realikea.weatherforecast.model.weather
 
 import com.realikea.weatherforecast.model.weather.subtype.UsEpaIndex
 import com.realikea.weatherforecast.model.weather.subtype.UvIndexType
+import com.realikea.weatherforecast.model.weather.subtype.WeatherConData
 import com.realikea.weatherforecast.model.weather.subtype.WindDirType
-import com.realikea.weatherforecast.network.AirQuality
 
 data class WeatherData(
     val temperatureCelsius: Double,
@@ -21,4 +21,4 @@ data class WeatherData(
     val windKph: Double,
     val windDirType: WindDirType,
     val visKM: Double
-    )
+)
