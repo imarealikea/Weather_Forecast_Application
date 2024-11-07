@@ -10,7 +10,7 @@
     <string name="visibility">Visibility</string>
     <string name="good">Good</string>
     <string name="moderate">Moderate</string>
-    <string name="unhealthy_for_sensitive_group">Unhealthy for sensitive group</string>
+    <string name="unhealthy_for_sensitive_group">Unhealthy for sensitive</string>
     <string name="unhealthy">Unhealthy</string>
     <string name="very_unhealthy">Very Unhealthy</string>
     <string name="hazardous">Hazardous</string>
@@ -32,9 +32,29 @@
     <string name="west_northwest">West-Northwest</string>
     <string name="northwest">Northwest</string>
     <string name="north_northwest">North-Northwest</string>
-    <string name="error" translatable="false">Error</string>
     <string name="from_the_dir">From the</string>
-    <string name="pm10">PM10</string>
-    <string name="co">CO</string>
-    <string name="no2">NO2</string>
+    <string name="pm10" translatable="false">PM10</string>
+    <string name="co" translatable="false">CO</string>
+    <string name="no2" translatable="false">NO2</string>
+    <string name="microgram_per_m3" translatable="false">µg/m³</string>
+    <string name="low">Low</string>
+    <string name="uv_low_recommend1">"You can safely enjoy being outside! "</string>
+    <string name="uv_low_recommend2">Wear sunglasses on bright days.</string>
+    <string name="uv_moderate_recommend1">"Stay in shade near midday when the sun is strongest. "</string>
+    <string name="uv_moderate_recommend2">If outdoors, wear sun-protective clothing, a wide-brimmed hat, and UV-blocking sunglasses.</string>
+    <string name="high">High</string>
+    <string name="uv_high_recommend1">"Reduce time in the sun between 10 a.m. and 4 p.m. "</string>
+    <string name="uv_high_recommend2">If outdoors, seek shade and wear sun-protective clothing, a wide-brimmed hat, and UV-blocking sunglasses.</string>
+    <string name="very_high">Very High</string>
+    <string name="uv_veryhigh_recommend1">"Minimize sun exposure between 10 a.m. and 4 p.m. "</string>
+    <string name="uv_veryhigh_recommend2">If outdoors, seek shade and wear sun-protective clothing, a wide-brimmed hat, and UV-blocking sunglasses.</string>
+    <string name="extreme">Extreme</string>
+    <string name="uv_extreme_recommend1">"Try to avoid sun exposure between 10 a.m. and 4 p.m. "</string>
+    <string name="uv_extreme_recommend2">If outdoors, seek shade and wear sun-protective clothing, a wide-brimmed hat, and UV-blocking sunglasses.</string>
+    <string name="null_text">Null</string>
+    <string name="error" translatable="false">error</string>
+    <string name="current_location">Current Location</string>
+    <string name="saved_locations">Saved Locations</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="sunset">Sunset</string>
 </resources>

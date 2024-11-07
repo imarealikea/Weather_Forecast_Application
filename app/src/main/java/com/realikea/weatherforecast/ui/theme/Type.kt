@@ -18,36 +18,65 @@ val provider = GoogleFont.Provider(
 )
 
 val bodyFontFamily = FontFamily(
-    Font(
-        googleFont = GoogleFont("IBM Plex Sans Thai"),
-        fontProvider = provider,
-    )
+    Font(R.font.ibmplexsansthai_regular),
+    Font(R.font.ibmplexsansthai_bold, FontWeight.Bold),
+    Font(R.font.ibmplexsansthai_medium, FontWeight.Medium)
 )
 
 val displayFontFamily = FontFamily(
-    Font(
-        googleFont = GoogleFont("IBM Plex Sans Thai"),
-        fontProvider = provider,
-    )
+    Font(R.font.ibmplexmono_regular),
+    Font(R.font.ibmplexmono_bold, FontWeight.Bold),
+    Font(R.font.ibmplexmono_medium, FontWeight.Medium)
 )
 
 // Default Material 3 typography values
 val baseline = Typography()
 
-val WeatherTypography = Typography(
-    displayLarge = baseline.displayLarge.copy(fontFamily = displayFontFamily),
-    displayMedium = baseline.displayMedium.copy(fontFamily = displayFontFamily),
-    displaySmall = baseline.displaySmall.copy(fontFamily = displayFontFamily),
-    headlineLarge = baseline.headlineLarge.copy(fontFamily = displayFontFamily),
-    headlineMedium = baseline.headlineMedium.copy(fontFamily = displayFontFamily),
-    headlineSmall = baseline.headlineSmall.copy(fontFamily = displayFontFamily),
-    titleLarge = baseline.titleLarge.copy(fontFamily = displayFontFamily),
-    titleMedium = baseline.titleMedium.copy(fontFamily = displayFontFamily),
-    titleSmall = baseline.titleSmall.copy(fontFamily = displayFontFamily),
-    bodyLarge = baseline.bodyLarge.copy(fontFamily = bodyFontFamily),
-    bodyMedium = baseline.bodyMedium.copy(fontFamily = bodyFontFamily),
-    bodySmall = baseline.bodySmall.copy(fontFamily = bodyFontFamily),
-    labelLarge = baseline.labelLarge.copy(fontFamily = bodyFontFamily),
-    labelMedium = baseline.labelMedium.copy(fontFamily = bodyFontFamily),
-    labelSmall = baseline.labelSmall.copy(fontFamily = bodyFontFamily),
+val Typography = Typography(
+    displayLarge = TextStyle(
+        fontFamily = displayFontFamily,
+        fontWeight = FontWeight.Bold,
+        fontSize = 60.sp
+    ),
+    displayMedium = TextStyle(
+        fontFamily = displayFontFamily,
+        fontWeight = FontWeight.Bold,
+        fontSize = 32.sp
+    ),
+    displaySmall = TextStyle(
+        fontFamily = displayFontFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 20.sp
+    ),
+    headlineMedium = TextStyle(
+        fontFamily = displayFontFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 18.sp
+    ),
+    headlineSmall = TextStyle(
+        fontFamily = displayFontFamily,
+        fontWeight = FontWeight.Bold,
+        fontSize = 15.sp
+    ),
+    titleLarge = TextStyle(
+        fontFamily = displayFontFamily,
+        fontWeight = FontWeight.Bold,
+        fontSize = 36.sp
+    ),
+    titleMedium = TextStyle(
+        fontFamily = displayFontFamily,
+        fontWeight = FontWeight.Bold,
+        fontSize = 32.sp,
+        letterSpacing = (-1).sp
+    ),
+    bodyMedium = TextStyle(
+        fontFamily = bodyFontFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp
+    ),
+    labelMedium = TextStyle(
+        fontFamily = bodyFontFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 24.sp
+    )
 )

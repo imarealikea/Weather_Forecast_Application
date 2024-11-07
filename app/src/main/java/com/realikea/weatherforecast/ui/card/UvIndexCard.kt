@@ -96,8 +96,8 @@ fun UVindexCard(
                                     .height(49.dp),
                             )
                             Text(
-                                text = data.uvIndex.uvIndexDesc,
-                                style = MaterialTheme.typography.bodyMedium,
+                                text = stringResource(data.uvIndex.uvIndexDesc),
+                                style = MaterialTheme.typography.headlineSmall,
                                 textAlign = TextAlign.Center,
                                 modifier = Modifier
                                     .width(182.dp)
@@ -159,12 +159,12 @@ fun UvIndexDialog(
             textAlign = TextAlign.Center
         )
         Text(
-            text = weatherData.uvIndex.uvIndexDesc,
+            text = stringResource(weatherData.uvIndex.uvIndexDesc),
             style = MaterialTheme.typography.titleMedium,
             textAlign = TextAlign.Center
         )
         Text(
-            text = weatherData.uvIndex.recommendDesc,
+            text = stringResource(weatherData.uvIndex.recommendDesc),
             style = MaterialTheme.typography.bodyLarge
 
         )

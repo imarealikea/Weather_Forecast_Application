@@ -3,8 +3,11 @@ package com.realikea.weatherforecast.data.mappers
 
 import android.annotation.SuppressLint
 import com.realikea.weatherforecast.model.weather.AirQualityData
-import com.realikea.weatherforecast.model.weather.ForecastData
-import com.realikea.weatherforecast.model.weather.GeocodeInfo
+import com.realikea.weatherforecast.model.weather.AstroData
+import com.realikea.weatherforecast.model.weather.DayData
+
+import com.realikea.weatherforecast.model.weather.ForecastDayData
+import com.realikea.weatherforecast.model.weather.HourForecastData
 import com.realikea.weatherforecast.model.weather.LocationData
 import com.realikea.weatherforecast.model.weather.WeatherData
 import com.realikea.weatherforecast.model.weather.WeatherInfo
@@ -12,22 +15,18 @@ import com.realikea.weatherforecast.model.weather.WeatherType
 import com.realikea.weatherforecast.model.weather.subtype.UsEpaIndex
 import com.realikea.weatherforecast.model.weather.subtype.UvIndexType
 import com.realikea.weatherforecast.model.weather.subtype.WindDirType
-import com.realikea.weatherforecast.network.CurrentDataDto
-import com.realikea.weatherforecast.network.GeocodeDto
 import com.realikea.weatherforecast.network.LocationDataDto
 import com.realikea.weatherforecast.network.WeatherDataDto
 import com.realikea.weatherforecast.network.WeatherDto
-
-
-data class IndexedForecastData(
-    val index: Int,
-    val data: ForecastData
-)
+import com.realikea.weatherforecast.network.forecast.ForecastDataDto
+import com.realikea.weatherforecast.network.forecast.ForecastDayDto
+import com.realikea.weatherforecast.network.forecast.HourForecastDto
 
 @SuppressLint("NewApi")
 fun WeatherDataDto.toWeatherDataMap(): WeatherData {
     return (
             WeatherData(
+                lastUpdatedEpoch = lastUpdatedEpoch,
                 temperatureCelsius = tempC,
                 lastUpdated = lastUpdated,
                 code = condition.code,
@@ -57,24 +56,46 @@ fun LocationDataDto.toLocationDataMap(): LocationData {
     )
 }
 
-/*@SuppressLint("NewApi")
-fun ForecastDataDto.toForecastDataMap(): List<ForecastData> {
-    return ForecastData(
-        date = this.forecastDay.date,
-        astroDto = this.forecastDay.astro
-    )
-}*/
+@SuppressLint("NewApi")
+fun ForecastDataDto.toForecastDataMap(): List<ForecastDayData> {
+    return forecastday.map { it.toForecastData() }
+}
+
+@SuppressLint("NewApi")
+fun ForecastDayDto.toForecastData(): ForecastDayData {
+    return ForecastDayData(
+            date = date_epoch,
+            astroDto = AstroData(
+                sunrise = astro.sunrise,
+                sunset = astro.sunset,
+                moonrise = astro.moonrise,
+                moonset = astro.moonset
+            ),
+            day = DayData(
+                maxtemp_c = day.maxtemp_c,
+                mintemp_c = day.mintemp_c,
+            ),
+            hourForecast = hourForecast.map {
+                HourForecastData(
+                    time_epoch = it.time_epoch,
+                    temp_c = it.temp_c,
+                    temp_f = it.temp_f,
+                    code = it.condition.code,
+                    humidity = it.humidity,
+                )
+            }
+        )
+}
 
 @SuppressLint("NewApi")
 fun WeatherDto.toWeatherInfo(): WeatherInfo {
     val weatherDataMap = weatherData.toWeatherDataMap()
     val locationDataMap = locationData.toLocationDataMap()
     val currentWeatherData = weatherDataMap
-    //val forecastDataMap = forecastData.toForecastDataMap()
+    val forecastData = forecastData.toForecastDataMap()
     return WeatherInfo(
-        //weatherDataPerDay = weatherDataMap,
         currentWeatherData = currentWeatherData,
         currentLocationData = locationDataMap,
-        //airQualityData = currentWeatherData.airQualityData
+        forecastDataList = forecastData
     )
 }

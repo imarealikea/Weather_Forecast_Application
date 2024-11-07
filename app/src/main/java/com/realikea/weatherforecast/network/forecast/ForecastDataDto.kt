@@ -4,5 +4,5 @@ import com.squareup.moshi.Json
 
 data class ForecastDataDto(
     @field:Json(name = "forecastday")
-    val forecastDay : ForecastDayDto
+    val forecastday: List<ForecastDayDto>
 )
