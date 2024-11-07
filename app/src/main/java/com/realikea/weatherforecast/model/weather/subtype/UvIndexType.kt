@@ -1,65 +1,59 @@
 package com.realikea.weatherforecast.model.weather.subtype
 
 import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import com.realikea.weatherforecast.R
 
 sealed class UvIndexType(
-    val uvIndexDesc: String,
-    val recommendDesc: String,
+    @StringRes val uvIndexDesc: Int,
+    @StringRes val recommendDesc: Int,
     @DrawableRes val colorIndex: Int
 ) {
     object Low : UvIndexType(
-        uvIndexDesc = "Low",
-        recommendDesc = "You can safely enjoy being outside! " +
-                "Wear sunglasses on bright days.",
+        uvIndexDesc = R.string.low,
+        recommendDesc = (R.string.uv_low_recommend1 /*+
+                R.string.uv_low_recommend2*/),
         colorIndex = R.drawable.low_uv
     )
     object Moderate : UvIndexType(
-        uvIndexDesc = "Moderate",
-        recommendDesc = "Stay in shade near midday when the sun is strongest. " +
-                "If outdoors, wear sun-protective clothing, a wide-brimmed hat, and UV-blocking sunglasses.",
+        uvIndexDesc = R.string.moderate,
+        recommendDesc = (R.string.uv_moderate_recommend1 /*+
+                R.string.uv_moderate_recommend2*/),
         colorIndex = R.drawable.moderate_uv
     )
     object High : UvIndexType(
-        uvIndexDesc = "High",
-        recommendDesc = "Reduce time in the sun between 10 a.m. and 4 p.m. " +
-                "If outdoors, seek shade and wear sun-protective clothing, a wide-brimmed hat, and UV-blocking sunglasses.",
+        uvIndexDesc = R.string.high,
+        recommendDesc = (R.string.uv_high_recommend1 /*+
+                R.string.uv_high_recommend2*/),
         colorIndex = R.drawable.high_uv
     )
     object VeryHigh : UvIndexType(
-        uvIndexDesc = "Very High",
-        recommendDesc = "Minimize sun exposure between 10 a.m. and 4 p.m. " +
-                "If outdoors, seek shade and wear sun-protective clothing, a wide-brimmed hat, and UV-blocking sunglasses.",
+        uvIndexDesc = R.string.very_high,
+        recommendDesc = (R.string.uv_veryhigh_recommend1 /*+
+                R.string.uv_veryhigh_recommend2*/),
         colorIndex = R.drawable.very_high_uv
     )
     object Extreme : UvIndexType(
-        uvIndexDesc = "Extreme",
-        recommendDesc = "Try to avoid sun exposure between 10 a.m. and 4 p.m. " +
-                "If outdoors, seek shade and wear sun-protective clothing, a wide-brimmed hat, and UV-blocking sunglasses.",
+        uvIndexDesc = R.string.extreme,
+        recommendDesc = (R.string.uv_extreme_recommend1 /*+
+                R.string.uv_extreme_recommend2*/),
         colorIndex = R.drawable.very_high_uv
     )
-    object Unknow : UvIndexType(
-        uvIndexDesc = "Null",
-        recommendDesc = "Null",
+    object Unknown : UvIndexType(
+        uvIndexDesc = R.string.null_text,
+        recommendDesc = R.string.null_text,
         colorIndex = R.drawable.low_uv
     )
 
     companion object {
         fun fromWeatherWeb(uv: Double): UvIndexType {
-            return when (uv) {
-                0.0 -> Low
-                1.0 -> Low
-                2.0 -> Low
-                3.0 -> Moderate
-                4.0 -> Moderate
-                5.0 -> Moderate
-                6.0 -> High
-                7.0 -> High
-                8.0 -> VeryHigh
-                9.0 -> VeryHigh
-                10.0 -> VeryHigh
-                11.0 -> Extreme
-                else -> Unknow
+            return when {
+                uv <= 3 -> Low
+                uv <= 5 -> Moderate
+                uv <= 7 -> High
+                uv <= 10 -> VeryHigh
+                uv <= 12 -> Extreme
+                else -> Unknown
             }
         }
     }

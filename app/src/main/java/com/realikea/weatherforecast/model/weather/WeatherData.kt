@@ -6,6 +6,7 @@ import com.realikea.weatherforecast.model.weather.subtype.WeatherConData
 import com.realikea.weatherforecast.model.weather.subtype.WindDirType
 
 data class WeatherData(
+    val lastUpdatedEpoch: Int,
     val temperatureCelsius: Double,
     val lastUpdated: String,
     val isDay: Int,

@@ -4,6 +4,8 @@ import com.realikea.weatherforecast.model.weather.subtype.AirQualityDto
 import com.squareup.moshi.Json
 
 data class WeatherDataDto(
+    @field:Json(name = "last_updated_epoch")
+    val lastUpdatedEpoch: Int,
     @field:Json(name = "last_updated")
     val lastUpdated: String,
     @field:Json(name = "temp_c")

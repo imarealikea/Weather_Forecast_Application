@@ -1,7 +1,6 @@
 package com.realikea.weatherforecast.ui.card
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -34,9 +33,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.realikea.weatherforecast.R
 import com.realikea.weatherforecast.model.weather.AirQualityData
+import com.realikea.weatherforecast.model.weather.AstroData
+import com.realikea.weatherforecast.model.weather.DayData
+import com.realikea.weatherforecast.model.weather.ForecastDayData
+import com.realikea.weatherforecast.model.weather.HourForecastData
 import com.realikea.weatherforecast.model.weather.LocationData
 import com.realikea.weatherforecast.model.weather.WeatherData
 import com.realikea.weatherforecast.model.weather.WeatherInfo
@@ -45,6 +49,7 @@ import com.realikea.weatherforecast.model.weather.subtype.UsEpaIndex
 import com.realikea.weatherforecast.model.weather.subtype.UvIndexType
 import com.realikea.weatherforecast.model.weather.subtype.WindDirType
 import com.realikea.weatherforecast.ui.WeatherState
+import com.realikea.weatherforecast.ui.theme.WeatherForecastTheme
 
 @Composable
 fun WindCard(
@@ -57,9 +62,9 @@ fun WindCard(
                 .width(170.dp)
                 .height(151.dp)
                 .alpha(1f)
-                .clickable {
+                /*.clickable {
                     showDialog = false
-                },
+                }*/,
         ){ Column(
             modifier = Modifier
                 .fillMaxHeight()
@@ -114,8 +119,9 @@ fun WindCard(
                     style = MaterialTheme.typography.headlineSmall,
                     modifier = Modifier
                         .align(Alignment.CenterHorizontally)
-                        .padding(top = 2.dp),
-                    textAlign = TextAlign.Center
+                        .padding(8.dp),
+                    textAlign = TextAlign.Center,
+                    lineHeight = 16.sp,
                 )
             }
             }
@@ -162,4 +168,76 @@ fun WindCard(
 @Composable
 fun WindCardPreview(
 ){
+    WeatherForecastTheme {
+        WindCard(
+            state = WeatherState(
+                WeatherInfo(
+                    currentWeatherData = WeatherData(
+                        lastUpdatedEpoch = 1730989800,
+                        lastUpdated = "2024-01-23 20:30",
+                        airQualityData = AirQualityData(co = 1695.6, no2 = 63.1, o3 = 22.7, so2 = 14.4, pm2_5 = 125.0, pm10 = 71.7),
+                        code = 1003,
+                        feelslikeCelsius = 28.8,
+                        humidity = 70,
+                        isDay = 0,
+                        uv = 1.0,
+                        uvIndex = UvIndexType.fromWeatherWeb(uv = 1.0),
+                        weatherType = WeatherType.Overcast,
+                        temperatureCelsius = 28.0,
+                        usEpaIndex = 1,
+                        usEpaIndexType = UsEpaIndex.fromWeatherWeb(usEpaIndex = 3),
+                        windKph = 16.9,
+                        windDirType = WindDirType.SSE,
+                        visKM = 10.0
+                    ),
+                    currentLocationData = LocationData(
+                        country = "Thailand",
+                        localtime = "2024-01-23 20:34",
+                        name = "Pak Kret",
+                        region = "Nonthaburi"
+                    ),
+                    forecastDataList =
+                        listOf(
+                            ForecastDayData(
+                                date = 1730678400,
+                                day = DayData(
+                                    maxtemp_c = 35.9,
+                                    mintemp_c = 88.8
+                                ),
+                                astroDto = AstroData(
+                                    sunrise = "06:13 AM",
+                                    sunset = "05:50 PM",
+                                    moonrise = "06:38 AM",
+                                    moonset = "06:15 PM",
+                                ),
+                                hourForecast = listOf(
+                                    HourForecastData(
+                                        time_epoch = 1730912400,
+                                        temp_c = 25.1,
+                                        temp_f = 77.3,
+                                        code = 58,
+                                        humidity = 90
+                                    ),
+                                    HourForecastData(
+                                        time_epoch = 1730916000,
+                                        temp_c = 25.1,
+                                        temp_f = 77.3,
+                                        code = 58,
+                                        humidity = 90
+                                    ),
+                                    HourForecastData(
+                                        time_epoch = 1730937600,
+                                        temp_c = 25.1,
+                                        temp_f = 77.3,
+                                        code = 58,
+                                        humidity = 90
+                                    )
+                                )
+                            )
+                        )
+                    )
+
+            ),
+        )
+    }
 }

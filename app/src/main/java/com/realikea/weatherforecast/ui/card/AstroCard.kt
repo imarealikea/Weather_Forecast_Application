@@ -1,28 +1,38 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
+package com.realikea.weatherforecast.ui.card
 
-package com.realikea.weatherforecast.ui
-
+import android.graphics.Color
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-
+import com.realikea.weatherforecast.R
 import com.realikea.weatherforecast.model.weather.AirQualityData
 import com.realikea.weatherforecast.model.weather.AstroData
 import com.realikea.weatherforecast.model.weather.DayData
@@ -35,96 +45,85 @@ import com.realikea.weatherforecast.model.weather.WeatherType
 import com.realikea.weatherforecast.model.weather.subtype.UsEpaIndex
 import com.realikea.weatherforecast.model.weather.subtype.UvIndexType
 import com.realikea.weatherforecast.model.weather.subtype.WindDirType
-import com.realikea.weatherforecast.ui.card.AqiCard
-import com.realikea.weatherforecast.ui.card.AstroCard
-import com.realikea.weatherforecast.ui.card.FeelLikeCard
-import com.realikea.weatherforecast.ui.card.HeaderData
-import com.realikea.weatherforecast.ui.card.HumidityCard
-import com.realikea.weatherforecast.ui.card.StatusBox
-import com.realikea.weatherforecast.ui.card.UVindexCard
-import com.realikea.weatherforecast.ui.card.VisibilityCard
-import com.realikea.weatherforecast.ui.card.WindCard
+import com.realikea.weatherforecast.ui.WeatherState
 import com.realikea.weatherforecast.ui.theme.WeatherForecastTheme
 
 @Composable
-fun DataScreen(
-    state: WeatherState,
-    modifier: Modifier,
-    ){
-    state.weatherInfo?.let{
-        Box(){
-            Column(
-                modifier = Modifier
-                    .padding(start = 16.dp, top = 1.dp, end = 16.dp)
-                    .fillMaxWidth()
-                    .fillMaxHeight()
-                    .verticalScroll(rememberScrollState()),
-                verticalArrangement = Arrangement.SpaceBetween
-            ) {
-                HeaderData(state = state, modifier = Modifier, color = MaterialTheme)
-                //Spacer(Modifier.height(25.dp))
-                Spacer(Modifier.height(14.dp))
-                Row(
-                    modifier = Modifier
-                        .align(Alignment.CenterHorizontally)
-                        .fillMaxSize(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Column(modifier = Modifier) {
-                        AqiCard(
-                            modifier = Modifier,
-                            color = MaterialTheme,
-                            state = state,
-                        )
-                        Spacer(Modifier.height(20.dp))
-                        UVindexCard(modifier = Modifier, color = MaterialTheme, state = state)
-                        Spacer(Modifier.height(20.dp))
-                        VisibilityCard(state = state, modifier = Modifier)
-                        Spacer(Modifier.height(20.dp))
-                        AstroCard(state = state)
-
-                    }
-                    Spacer(
-                        Modifier
-                            .width(2.dp)
-                            .align(Alignment.CenterVertically)
-                    )
-                    Column(modifier = Modifier, verticalArrangement = Arrangement.SpaceAround) {
-                        FeelLikeCard(modifier = Modifier, color = MaterialTheme, state = state)
-                        Spacer(Modifier.height(20.dp))
-                        HumidityCard(modifier = Modifier, color = MaterialTheme, state = state)
-                        Spacer(Modifier.height(20.dp))
-                        WindCard(state = state)
-                    }
+fun AstroCard(state: WeatherState){
+    state.weatherInfo?.forecastDataList?.let { data ->
+        var showDialog by remember { mutableStateOf(false) }
+        Card(
+            modifier = Modifier
+                .size(170.dp, 151.dp)
+                .clickable {
+                    showDialog = true
                 }
-                StatusBox(modifier = Modifier, vertical = Alignment.Bottom, state = state)
+        ){
+            Row(
+                horizontalArrangement = Arrangement.SpaceAround,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(top = 10.dp, bottom = 10.dp)
+            ){
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.fillMaxHeight(),
+                    verticalArrangement = Arrangement.SpaceAround
+                ) {
+                    Text(
+                        text = stringResource(R.string.sunrise),
+                        textAlign = TextAlign.Start,
+                        style = MaterialTheme.typography.headlineSmall,
+                        modifier = Modifier
+
+                    )
+                    Image(
+                        imageVector = ImageVector.vectorResource(id = R.drawable.sunrise),
+                        modifier = Modifier,
+                        contentDescription = null
+                    )
+                    Text(
+                        text = data[0].astroDto.sunrise,
+                        style = MaterialTheme.typography.headlineSmall,
+                    )
+                }
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.SpaceAround,
+                    modifier = Modifier.fillMaxHeight(),
+                ) {
+                    Text(
+                        text = stringResource(R.string.sunset),
+                        style = MaterialTheme.typography.headlineSmall,
+                        modifier = Modifier
+                            .alpha(1f),
+                    )
+                    Image(
+                        imageVector = ImageVector.vectorResource(R.drawable.sunset),
+                        modifier = Modifier,
+                        contentDescription = null
+                    )
+                    Text(
+                        text = data[0].astroDto.sunset,
+                        style = MaterialTheme.typography.headlineSmall,
+                    )
+                }
             }
         }
     }
-
 }
-
 
 @Preview(showBackground = true)
 @Composable
-fun MainScreenPreview(
-){
-    WeatherForecastTheme(){
-        DataScreen(
-            modifier = Modifier,
+fun AstroPreview(){
+    WeatherForecastTheme {
+        AstroCard(
             state = WeatherState(
                 WeatherInfo(
                     currentWeatherData = WeatherData(
                         lastUpdatedEpoch = 1730989800,
                         lastUpdated = "2024-01-23 20:30",
-                        airQualityData = AirQualityData(
-                            co = 1695.6,
-                            no2 = 63.1,
-                            o3 = 22.7,
-                            so2 = 14.4,
-                            pm2_5 = 47.0,
-                            pm10 = 71.7
-                        ),
+                        airQualityData = AirQualityData(co = 1695.6, no2 = 63.1, o3 = 22.7, so2 = 14.4, pm2_5 = 125.0, pm10 = 71.7),
                         code = 1003,
                         feelslikeCelsius = 28.8,
                         humidity = 70,
@@ -134,7 +133,7 @@ fun MainScreenPreview(
                         weatherType = WeatherType.Overcast,
                         temperatureCelsius = 28.0,
                         usEpaIndex = 1,
-                        usEpaIndexType = UsEpaIndex.fromWeatherWeb(usEpaIndex = 1),
+                        usEpaIndexType = UsEpaIndex.fromWeatherWeb(usEpaIndex = 3),
                         windKph = 16.9,
                         windDirType = WindDirType.W,
                         visKM = 10.0
@@ -145,8 +144,7 @@ fun MainScreenPreview(
                         name = "Pak Kret",
                         region = "Nonthaburi"
                     ),
-                    forecastDataList =
-                    listOf(
+                    forecastDataList = listOf(
                         ForecastDayData(
                             date = 1730678400,
                             day = DayData(
@@ -185,7 +183,7 @@ fun MainScreenPreview(
                         )
                     )
                 )
-            ),
+            )
         )
     }
 }
